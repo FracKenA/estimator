@@ -19,6 +19,19 @@ type application struct {
 	templateCache map[string]*template.Template
 }
 
+// TODO move this to pkg/models
+// Needed for template to generate the
+// System Assumptions section
+// TODO better names?
+type SysAssumption struct {
+	Label   string
+	VarName string
+}
+
+type Assumptions struct {
+	System []SysAssumption
+}
+
 func main() {
 
 	// TODO replace with viper

@@ -5,170 +5,267 @@
 {{define "subtitle"}}Show me the incentive and I will show you the outcome. - Charlie Munger{{end}}
 
 {{define "main"}}
-<section class="hero is-primary">
-  <div class="hero-body">
-    <div class="container">
-      <p class="title">
-      {{template "title" .}}
-      </p>
-      <p class="subtitle">
-      {{template "subtitle" .}}
-      </p>
+<div id="estimator">
+  <section class="hero is-primary">
+    <div class="hero-body">
+      <div class="container">
+	<p class="title">
+	{{template "title" .}}
+	</p>
+	<p class="subtitle">
+	{{template "subtitle" .}}
+	</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Project Parameters -->
+  <div class="columns">
+    <div class="column is-one-third">
+      <section class="section">
+	<div class="container">
+	  <h3 class="title is-3">Inputs</h3>
+	  <form>
+
+	    <div class="field">
+	      <label class="label">Number of teams|gateways</label>
+	      <div class="control">
+		<input class="input" type="text" v-model.number="gwNum" :value="gwNum">
+	      </div>
+	    </div>
+
+	    <div class="field">
+	      <label class="label">Number of servers</label>
+	      <div class="control">
+		<input class="input" type="text" v-model.number="numServers" :value="numServers">
+	      </div>
+	    </div>
+
+	    <!-- TODO make checkboxes a loop -->
+
+	    <div class="field">
+	      <div class="control">
+		<label class="checkbox">
+		  <input type="checkbox">
+		  Database logging
+		</label>
+	      </div>
+	    </div>
+
+	    <div class="field">
+	      <div class="control">
+		<label class="checkbox">
+		  <input type="checkbox">
+		  Authentication
+		</label>
+	      </div>
+	    </div>
+
+	    <div class="field">
+	      <div class="control">
+		<label class="checkbox">
+		  <input type="checkbox">
+		  Level 3
+		</label>
+	      </div>
+	    </div>
+
+	    <div class="field">
+	      <div class="control">
+		<label class="checkbox">
+		  <input type="checkbox">
+		  Level 4
+		</label>
+	      </div>
+	    </div>
+
+	    <div class="field">
+	      <div class="control">
+		<label class="checkbox">
+		  <input type="checkbox">
+		  Level 5
+		</label>
+	      </div>
+	    </div>
+
+	  </form>
+	</div>
+      </section>
+
+      <!-- System Assumptions -->
+
+      <section class="section">
+	<div class="container">
+	  <form>
+	    {{range .Sys.System}}
+	    <div class="field">
+	      <label class="label">{{.Label}}: {% {{.VarName}} %}</label> 
+	      <div class="control">
+		<input class="input" type="text" v-model.number={{.VarName}} :value={{.VarName}}>
+	      </div>
+	    </div>
+	    {{end}}
+	  </form>
+	</div>
+      </section>
+    </div>
+
+    <!-- Project Estimate Table -->
+    <div class="column is-one-third">
+      <section class="section">
+	<div class="container">
+	  <h3 class="title is-3">Project Estimate</h3>
+	  <table class="table is-fullwidth">
+	    <thead>
+	      <tr>
+		<th></th>
+		<th>Lower</th>
+		<th>Upper</th>
+		<th>Scope</th>
+	      </tr>
+	    </thead>
+	    <tfoot>
+	      <tr>
+		<th>Total</th>
+		<th></th>
+		<th></th>
+		<th></th>
+	      </tr>
+	    </tfoot>
+	    <tbody>
+	      <tr>
+		<th>Gateway Installation</th>
+		<td>{% gwNum %}</td>
+		<td>{% gwNum %}</td>
+		<td>{% gwNum %} Teams</td>
+	      </tr>
+	      <tr>
+		<th>Level 1,2</th>
+		<td>{% l1l2EstimateLower %}</td>
+		<td>{% l1l2EstimateUpper %}</td>
+		<td>{% numServers %} Servers</td>
+	      </tr>
+	    </tbody>
+	  </table>
+
+	  <table class="table is-fullwidth">
+	    <thead>
+	      <tr>
+		<th></th>
+		<th>Lower</th>
+		<th>Upper</th>
+	      </tr>
+	    </thead>
+	    <tfoot>
+	      <tr>
+		<th>Total</th>
+		<th></th>
+		<th></th>
+	      </tr>
+	    </tfoot>
+	    <tbody>
+	      <tr>
+		<th>Solution Design</th>
+		<td></td>
+		<td></td>
+	      </tr>
+	      <tr>
+		<th>Implementation</th>
+		<td></td>
+		<td></td>
+	      </tr>
+	      <tr>
+		<th>Project Overhead</th>
+		<td></td>
+		<td></td>
+	      </tr>
+	    </tbody>
+	  </table>
+	</div>
+      </section>
+    </div>
+
+    <div class="column is-one-third">
+      <section class="section">
+	<div class="container">
+	  <table class="table">
+	    <thead>
+	      <tr>
+		<th>Assumptions</th>
+		<th></th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <tr>
+		<th>Number of L1,L2 lower limit days</th>
+		<td>{% l1l2LowerLimitDays %}</td>
+	      </tr>
+	      <tr>
+		<th>Number of manual procs and logfiles per day</th>
+		<td>{% procLogfilesPerDay %}</td>
+	      </tr>
+	      <tr>
+		<th>Gateway Installs per day</th>
+		<td>{% gwInstallsPerDay %}</td>
+	      </tr>
+	      <tr>
+		<th>Number of L3 servers per day</th>
+		<td>{% l3ServersPerDay %}</td>
+	      </tr>
+	      <tr>
+		<th>Number of L4 servers per day</th>
+		<td>{% l4ServersPerDay %}</td>
+	      </tr>
+	      <tr>
+		<th>Number of L5 servers per day</th>
+		<td>{% l5ServersPerDay %}</td>
+	      </tr>
+	      <tr>
+		<th>Dashboard Lower Estimate</th>
+		<td>{% dashboardLower %}</td>
+	      </tr>
+	      <tr>
+		<th>Dashboard Upper Estimate</th>
+		<td>{% dashboardUpper  %}</td>
+	      </tr>
+	      <tr>
+		<th>Documentation Percent of Implementation</th>
+		<td>{% documentationPercent %}</td>
+	      </tr>
+	      <tr>
+		<th>Misc and KT percent of Implementation</th>
+		<td>{% ktPercent %}</td>
+	      </tr>
+	      <tr>
+		<th>ITRS Contingency Percent of Implementation</th>
+		<td>{% contingencyPercent %}</td>
+	      </tr>
+	      <tr>
+		<th>No of Manual L1 and L2 servers per day</th>
+		<td>{% numl1l2ServersPerDay %}</td>
+	      </tr>
+	      <tr>
+		<th>No of processes and Logfiles to be monitored</th>
+		<td>{% totalLogProc %}</td>
+	      </tr>
+	      <tr>
+		<th>No of severs to reach lower limit</th>
+		<td>{% numServersLower %}</td>
+	      </tr>
+	    </tbody>
+	  </table>
+	</div>
+      </section>
+
     </div>
   </div>
-</section>
-<section class="section">
-  <div class="container">
-    <form>
-
-      <div class="field is-horizontal">
-	<div class="field-label is-normal">
-	  <label class="label">Number of teams/gateways</label>
-	</div>
-	<div class="field-body">
-	  <div class="field">
-	    <div class="control">
-	      <input class="input" type="text" placeholder="2">
-	    </div>
-	  </div>
-	</div>
-      </div>
-
-      <div class="field is-horizontal">
-	<div class="field-label is-normal">
-	  <label class="label">Number of servers</label>
-	</div>
-	<div class="field-body">
-	  <div class="field">
-	    <div class="control">
-	      <input class="input" type="text" placeholder="2">
-	    </div>
-	  </div>
-	</div>
-      </div>
-
-      <div class="field is-horizontal">
-	<div class="field-label">
-	  <label class="label">Database logging</label>
-	</div>
-	<div class="field-body">
-	  <div class="field">
-	    <div class="control">
-	      <label class="checkbox">
-		<input type="checkbox">
-	      </label>
-	    </div>
-	  </div>
-	</div>
-      </div>
-
-      <div class="field is-horizontal">
-	<div class="field-label">
-	  <label class="label">Authentication</label>
-	</div>
-	<div class="field-body">
-	  <div class="field">
-	    <div class="control">
-	      <label class="checkbox">
-		<input type="checkbox">
-	      </label>
-	    </div>
-	  </div>
-	</div>
-      </div>
-
-      <div class="field is-horizontal">
-	<div class="field-label">
-	  <label class="label">Level 3</label>
-	</div>
-	<div class="field-body">
-	  <div class="field">
-	    <div class="control">
-	      <label class="checkbox">
-		<input type="checkbox">
-	      </label>
-	    </div>
-	  </div>
-	</div>
-      </div>
-
-      <div class="field is-horizontal">
-	<div class="field-label">
-	  <label class="label">Level 4</label>
-	</div>
-	<div class="field-body">
-	  <div class="field">
-	    <div class="control">
-	      <label class="checkbox">
-		<input type="checkbox">
-	      </label>
-	    </div>
-	  </div>
-	</div>
-      </div>
-
-      <div class="field is-horizontal">
-	<div class="field-label">
-	  <label class="label">Level 5</label>
-	</div>
-	<div class="field-body">
-	  <div class="field">
-	    <div class="control">
-	      <label class="checkbox">
-		<input type="checkbox">
-	      </label>
-	    </div>
-	  </div>
-	</div>
-      </div>
-
-    </form>
-  </div>
-</section>
-<section>
-  <div class="container">
-    <table class="table">
-      <thead>
-	<tr>
-	  <th></th>
-	  <th>Lower</th>
-	  <th>Upper</th>
-	</tr>
-      </thead>
-      <tfoot>
-	<tr>
-	  <th>Total</th>
-	  <th></th>
-	  <th></th>
-	</tr>
-      </tfoot>
-      <tbody>
-	<tr>
-	  <th>Solution Design</th>
-	  <td></td>
-	  <td></td>
-	</tr>
-	<tr>
-	  <th>Implementation</th>
-	  <td></td>
-	  <td></td>
-	</tr>
-	<tr>
-	  <th>Project Overhead</th>
-	  <td></td>
-	  <td></td>
-	</tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-<section class="section">
-  <div class="container">
-  </div>
-</section>
+</div>
 {{end}}
 
 <!--
+  From the xls
+
+
   Number of Teams / Gateways	2
   Number of Servers	20
   Is Level 3 required (y/n)	y
