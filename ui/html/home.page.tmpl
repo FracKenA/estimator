@@ -1,0 +1,248 @@
+{{template "base" .}}
+
+{{define "title"}}PS Project Estimator{{end}}
+
+{{define "subtitle"}}Show me the incentive and I will show you the outcome. - Charlie Munger{{end}}
+
+{{define "main"}}
+<section class="hero is-primary">
+  <div class="hero-body">
+    <div class="container">
+      <p class="title">
+      {{template "title" .}}
+      </p>
+      <p class="subtitle">
+      {{template "subtitle" .}}
+      </p>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <form>
+
+      <div class="field is-horizontal">
+	<div class="field-label is-normal">
+	  <label class="label">Number of teams/gateways</label>
+	</div>
+	<div class="field-body">
+	  <div class="field">
+	    <div class="control">
+	      <input class="input" type="text" placeholder="2">
+	    </div>
+	  </div>
+	</div>
+      </div>
+
+      <div class="field is-horizontal">
+	<div class="field-label is-normal">
+	  <label class="label">Number of servers</label>
+	</div>
+	<div class="field-body">
+	  <div class="field">
+	    <div class="control">
+	      <input class="input" type="text" placeholder="2">
+	    </div>
+	  </div>
+	</div>
+      </div>
+
+      <div class="field is-horizontal">
+	<div class="field-label">
+	  <label class="label">Database logging</label>
+	</div>
+	<div class="field-body">
+	  <div class="field">
+	    <div class="control">
+	      <label class="checkbox">
+		<input type="checkbox">
+	      </label>
+	    </div>
+	  </div>
+	</div>
+      </div>
+
+      <div class="field is-horizontal">
+	<div class="field-label">
+	  <label class="label">Authentication</label>
+	</div>
+	<div class="field-body">
+	  <div class="field">
+	    <div class="control">
+	      <label class="checkbox">
+		<input type="checkbox">
+	      </label>
+	    </div>
+	  </div>
+	</div>
+      </div>
+
+      <div class="field is-horizontal">
+	<div class="field-label">
+	  <label class="label">Level 3</label>
+	</div>
+	<div class="field-body">
+	  <div class="field">
+	    <div class="control">
+	      <label class="checkbox">
+		<input type="checkbox">
+	      </label>
+	    </div>
+	  </div>
+	</div>
+      </div>
+
+      <div class="field is-horizontal">
+	<div class="field-label">
+	  <label class="label">Level 4</label>
+	</div>
+	<div class="field-body">
+	  <div class="field">
+	    <div class="control">
+	      <label class="checkbox">
+		<input type="checkbox">
+	      </label>
+	    </div>
+	  </div>
+	</div>
+      </div>
+
+      <div class="field is-horizontal">
+	<div class="field-label">
+	  <label class="label">Level 5</label>
+	</div>
+	<div class="field-body">
+	  <div class="field">
+	    <div class="control">
+	      <label class="checkbox">
+		<input type="checkbox">
+	      </label>
+	    </div>
+	  </div>
+	</div>
+      </div>
+
+    </form>
+  </div>
+</section>
+<section>
+  <div class="container">
+    <table class="table">
+      <thead>
+	<tr>
+	  <th></th>
+	  <th>Lower</th>
+	  <th>Upper</th>
+	</tr>
+      </thead>
+      <tfoot>
+	<tr>
+	  <th>Total</th>
+	  <th></th>
+	  <th></th>
+	</tr>
+      </tfoot>
+      <tbody>
+	<tr>
+	  <th>Solution Design</th>
+	  <td></td>
+	  <td></td>
+	</tr>
+	<tr>
+	  <th>Implementation</th>
+	  <td></td>
+	  <td></td>
+	</tr>
+	<tr>
+	  <th>Project Overhead</th>
+	  <td></td>
+	  <td></td>
+	</tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+  </div>
+</section>
+{{end}}
+
+<!--
+  Number of Teams / Gateways	2
+  Number of Servers	20
+  Is Level 3 required (y/n)	y
+  Is Level 4 required (y/n)	n
+  Is Level 5 required (y/n)	n
+  Database Logging required / 1 per team	y
+  Authentication Required	y
+  Complex Rules	y
+  Solution Design % of Implementation	10
+  How many dashboards are required	1
+  PM days per man week	1
+
+
+  Project Estimate			
+
+  Lower Estimate	Upper Estimate
+  Solution Design	2	2
+  Implementation	21	21
+  Project Overhead	16	16
+
+  Total	39 - 39	
+
+
+  Estimate Breakdown				
+
+
+  Lower Estimate	Upper Estimate	Scope
+  Solution Design	2	2	10% of Implementation
+
+  Implementation			
+  Gateway Installation	2	2	2 Teams
+  Level 1 & 2	5	NA	20 Servers
+  Level 3	4	4	30% of servers
+  Level 4	NA	NA	20% of servers
+  Level 5	NA	NA	10% of servers
+  Dashboards	10	15	1
+
+  Project Overhead			
+  Project Management	6	6	For 7/7 weeks
+  Misc Config (database logging, Rules,…)	2	2	For 2  Teams
+  Knowledge Transfer	2	2	For 2 Teams
+  Documentation	3	3	15% of Implementation
+  ITRS Contingency	2	2	10% of Implementation
+
+  Estimate Assumptions			
+
+
+  System Assumptions		
+  Number of Geneos Environments (Dev, Prod)	1	
+  Gateways per Team	1	
+  Number of process per server	5	
+  Number of logfiles per server	5	
+  % of servers Level 3 applies to	30	
+  % of servers Level 4 applies to	20	
+  % of servers Level 5 applies to	10	
+
+  Runrate Assumptions		
+  Number of manual proc's & logfiles per day	40	
+  Gateway Installs per day	1	
+  Number of L3 servers per day	1.5	
+  Number of L4 servers per day	1	
+  Number of L5 servers per day	0.75	
+  Dashboard Lower Estimate	10	
+  Dashboard Upper Estimate	15	
+  Documentation % of Implementation	15	
+  Misc & KT % of Implementation	5	
+  ITRS Contingency % of Implementation	10	
+
+  Derived Assumptions		
+  No of Manual L1 & 2 servers per day	4	
+  No of processes & Logfiles to be monitored	200	
+  No of severs to reach lower limit	40	
+
+  Calculation Assumptions		
+  Number of L1 & L2 lower limit days	10	
+
+-->
