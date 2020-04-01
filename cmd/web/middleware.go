@@ -2,11 +2,16 @@ package main
 
 import (
 	"fmt"
-	"github.com/justinas/nosurf"
-	"github.com/sirupsen/logrus"
 	"net/http"
 )
 
+import(
+	//"github.com/justinas/nosurf" Used in unused function
+	"github.com/sirupsen/logrus"
+)
+
+/*
+NOTE: Unused functions.
 func secureHeaders(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("X-XSS-Protection", "1; mode=block")
@@ -24,6 +29,8 @@ func noSurf(next http.Handler) http.Handler {
 	})
 	return csrfHandler
 }
+
+ */
 
 func (app *application) logRequest(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

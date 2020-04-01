@@ -17,7 +17,7 @@ type templateData struct {
 	Sys         Assumptions
 }
 
-var funcs = template.FuncMap{
+var funcMap = template.FuncMap{
 	"humanDate": humanDate,
 }
 
@@ -32,7 +32,7 @@ func newTemplateCache(dir string) (map[string]*template.Template, error) {
 	for _, page := range pages {
 		name := filepath.Base(page)
 
-		ts, err := template.New(name).Funcs(funcs).ParseFiles(page)
+		ts, err := template.New(name).Funcs(funcMap).ParseFiles(page)
 		if err != nil {
 			return nil, err
 		}

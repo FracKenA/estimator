@@ -9,7 +9,8 @@ import (
 )
 
 // EmailRX email regex
-var EmailRX = regexp.MustCompile("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
+// TODO: Unused var
+// var EmailRX = regexp.MustCompile("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
 
 // Form struct
 type Form struct {
@@ -18,12 +19,16 @@ type Form struct {
 }
 
 // New constructor
+// TODO: Unused Function.
+/*
 func New(data url.Values) *Form {
   return &Form{
     data,
     errors(map[string][]string{}),
   }
 }
+
+ */
 
 // Required check required field
 func (f *Form) Required(fields ...string) {

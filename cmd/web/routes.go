@@ -2,7 +2,9 @@ package main
 
 import (
 	"net/http"
+)
 
+import (
 	"github.com/bmizerany/pat"
 	"github.com/justinas/alice"
 )

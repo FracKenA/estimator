@@ -6,7 +6,9 @@ import (
 	"net/http"
 	"runtime/debug"
 	"time"
+)
 
+import (
 	// "github.com/justinas/nosurf"
 	"github.com/sirupsen/logrus"
 )
@@ -27,7 +29,7 @@ func (app *application) notFound(w http.ResponseWriter) {
 	app.clientError(w, http.StatusNotFound)
 }
 
-func (app *application) addDefaultData(td *templateData, r *http.Request) *templateData {
+func (app *application) addDefaultData(td *templateData, _ *http.Request) *templateData {
 	if td == nil {
 		td = &templateData{}
 	}
@@ -51,7 +53,12 @@ func (app *application) render(w http.ResponseWriter, r *http.Request, name stri
 		app.serverError(w, err)
 		return
 	}
-	buf.WriteTo(w)
+	_, err = buf.WriteTo(w)
+	if err != nil {
+		app.serverError(w, err)
+		return
+	}
+
 }
 
 /*

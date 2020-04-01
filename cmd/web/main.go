@@ -3,14 +3,16 @@ package main
 import (
 	"flag"
 	"html/template"
+	"log"
 	"net/http"
 	"os"
 	"time"
+)
 
+import (
 	// TODO replace this with gorilla?
 	// "github.com/golangcollege/sessions"
 	"github.com/sirupsen/logrus"
-	"log"
 )
 
 type application struct {
